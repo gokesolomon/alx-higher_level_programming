@@ -1,59 +1,75 @@
 #!/usr/bin/python3
+""" empty class Rectangle that defines a rectangle
+"""
 
-"""Define a class Square."""
 
+class Rectangle:
+    """ class rectangle"""
+    number_of_instances = 0
 
-class Square:
-    """Represent a square."""
+    def __init__(self, width=0, height=0):
+        """ Instantiation with optional width and height"""
+        self.width = width
+        self.height = height
+        type(self).number_of_instances += 1
 
-    def __init__(self, size=0, position=(0, 0)):
-        """Initialize a new square.
-        Args:
-            size (int): The size of the new square.
-            position (int, int): The position of the new square.
+    @property
+    def width(self):
+        """ width
         """
-        self.size = size
-        self.position = position
+        return self.__width
 
     @property
-    def size(self):
-        """Get/set the current size of the square."""
-        return (self.__size)
+    def height(self):
+        """height
+        """
+        return self.__height
 
-    @size.setter
-    def size(self, value):
-        if not isinstance(value, int):
-            raise TypeError("size must be an integer")
-        elif value < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = value
+    @width.setter
+    def width(self, value):
+        """ width setter
+        """
+        if type(value) is not int:
+            raise TypeError("width must be an integer")
+        if value < 0:
+            raise ValueError("width must be >= 0")
+        self.__width = value
 
-    @property
-    def position(self):
-        """Get/set the current position of the square."""
-        return (self.__position)
-
-    @position.setter
-    def position(self, value):
-        if (not isinstance(value, tuple) or
-                len(value) != 2 or
-                not all(isinstance(num, int) for num in value) or
-                not all(num >= 0 for num in value)):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        self.__position = value
+    @height.setter
+    def height(self, value):
+        """ height setter
+        """
+        if type(value) is not int:
+            raise TypeError("height must be an integer")
+        if value < 0:
+            raise ValueError("height must be >= 0")
+        self.__height = value
 
     def area(self):
-        """Return the current area of the square."""
-        return (self.__size * self.__size)
+        """ returns rectangle area"""
+        return self.__width * self.__height
 
-    def my_print(self):
-        """Print the square with the # character."""
-        if self.__size == 0:
-            print("")
-            return
+    def perimeter(self):
+        """ returns rectangle perimiter"""
+        if self.__width is 0 or self.__height is 0:
+            return 0
+        return self.__width * 2 + self.__height * 2
 
-        [print("") for i in range(0, self.__position[1])]
-        for i in range(0, self.__size):
-            [print(" ", end="") for j in range(0, self.__position[0])]
-            [print("#", end="") for k in range(0, self.__size)]
-            print("")
+    def __str__(self):
+        """ return the rectangle with the character #
+        """
+        if self.__width is 0 or self.__height is 0:
+            return ""
+        return ("\n".join(["".join(["#" for i in range(self.__width)])
+                for j in range(self.__height)]))
+
+    def __repr__(self):
+        """ return a string representation of the rectangle
+        """
+        return "Rectangle({}, {})".format(self.__width, self.__height)
+
+    def __del__(self):
+        """Print the message when an instance of Rectangle is deleted
+        """
+        type(self).number_of_instances -= 1
+        print("Bye rectangle...")
