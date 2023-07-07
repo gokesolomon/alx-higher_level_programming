@@ -1,7 +1,4 @@
 #!/usr/bin/python3
-""" LockedClass
-"""
-
-
-class LockedClass:
-    __slots__= ['first_name']
+def magic_string(H=[]):
+    H += ["BestSchool"]
+    return (", ".join(H))
